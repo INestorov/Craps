@@ -1,10 +1,7 @@
-package com.games.craps.GameLogic;
+package com.games.craps.gamelogic;
 
-import com.games.craps.Entity.GameRequest;
-import com.games.craps.Entity.GameResponse;
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Controller;
+import com.games.craps.entity.GameRequest;
+import com.games.craps.entity.GameResponse;
 
 import java.util.ArrayList;
 import java.util.List;

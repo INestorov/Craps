@@ -1,9 +1,9 @@
-package com.games.craps.Controller;
+package com.games.craps.controller;
 
-import com.games.craps.Entity.GameRequest;
-import com.games.craps.Entity.GameResponse;
-import com.games.craps.GameLogic.CarpsGameLogic;
-import com.games.craps.Validator.RequestValidator;
+import com.games.craps.entity.GameRequest;
+import com.games.craps.entity.GameResponse;
+import com.games.craps.gamelogic.CarpsGameLogic;
+import com.games.craps.validator.RequestValidator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -20,17 +20,18 @@ public class CrapsController {
 
     static BigDecimal credits = new BigDecimal("400.0").setScale(2, RoundingMode.DOWN);
 
-    @PostMapping("/playSingleRound")
-    public ResponseEntity<?> playSingleRound(@RequestBody GameRequest gameRequest){
+    @PostMapping("/play-single-round")
+    public ResponseEntity playSingleRound(@RequestBody GameRequest gameRequest){
         if(!RequestValidator.validateRequest(gameRequest)) return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Invalid request, please provide typeOfGame and stakes larger than 0");
 
         GameResponse gameResponse = CarpsGameLogic.gameLogic(gameRequest);
+        
         return ResponseEntity.ok(gameResponse);
     }
 
-    @PostMapping("/playMultipleRounds")
-    public ResponseEntity<?> playMultiple(@RequestParam("numberOfRounds") int numberOfRounds, @RequestBody GameRequest gameRequest) {
+    @PostMapping("/play-multiple-rounds")
+    public ResponseEntity playMultiple(@RequestParam("numberOfRounds") int numberOfRounds, @RequestBody GameRequest gameRequest) {
         if(!RequestValidator.validateRequest(gameRequest)) return ResponseEntity.status(HttpStatus.BAD_REQUEST)
                 .body("Invalid request, please provide typeOfGame and stakes larger than 0");
 

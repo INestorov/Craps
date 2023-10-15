@@ -1,6 +1,6 @@
-package com.games.craps.Validator;
+package com.games.craps.validator;
 
-import com.games.craps.Entity.GameRequest;
+import com.games.craps.entity.GameRequest;
 
 import java.math.BigDecimal;
 

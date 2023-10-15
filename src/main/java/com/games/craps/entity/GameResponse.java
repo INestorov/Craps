@@ -1,4 +1,4 @@
-package com.games.craps.Entity;
+package com.games.craps.entity;
 
 
 import org.springframework.stereotype.Component;
