@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Random;
 
 public class CarpsGameLogic {
-    public static GameResponse gameLogic(GameRequest gameRequest) {
+    public static GameResponse playOneRound(GameRequest gameRequest) {
         GameResponse gameResponse = new GameResponse();
 
         gameResponse.setTypeOfGame(gameRequest.getTypeOfGame());

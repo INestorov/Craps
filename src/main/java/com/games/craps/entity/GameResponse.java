@@ -22,7 +22,7 @@ public class GameResponse {
 
     public GameResponse(BigDecimal stake, String typeOfGame, String outcomeOfRound, BigDecimal payout, List<List<Integer>> roundDetails) {
         this.stake = stake.setScale(2, RoundingMode.DOWN);
-        this.typeOfGame = typeOfGame;
+        this.typeOfGame = typeOfGame.toLowerCase();
         this.outcomeOfRound = outcomeOfRound;
         this.payout = payout.setScale(2, RoundingMode.DOWN);
         this.roundDetails = roundDetails;
@@ -41,7 +41,7 @@ public class GameResponse {
     }
 
     public void setTypeOfGame(String typeOfGame) {
-        this.typeOfGame = typeOfGame;
+        this.typeOfGame = typeOfGame.toLowerCase();
     }
 
     public String getOutcomeOfRound() {

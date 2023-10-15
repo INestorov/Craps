@@ -3,8 +3,7 @@ package com.games.craps.controller;
 import com.games.craps.entity.GameRequest;
 import com.games.craps.entity.GameResponse;
 import com.games.craps.gamelogic.CarpsGameLogic;
-import com.games.craps.validator.RequestValidator;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -21,27 +20,22 @@ public class CrapsController {
     static BigDecimal credits = new BigDecimal("400.0").setScale(2, RoundingMode.DOWN);
 
     @PostMapping("/play-single-round")
-    public ResponseEntity playSingleRound(@RequestBody GameRequest gameRequest){
-        if(!RequestValidator.validateRequest(gameRequest)) return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("Invalid request, please provide typeOfGame and stakes larger than 0");
+    public ResponseEntity playSingleRound(@Valid @RequestBody GameRequest gameRequest){
+        GameResponse gameResponse = CarpsGameLogic.playOneRound(gameRequest);
 
-        GameResponse gameResponse = CarpsGameLogic.gameLogic(gameRequest);
-        
         return ResponseEntity.ok(gameResponse);
     }
 
     @PostMapping("/play-multiple-rounds")
-    public ResponseEntity playMultiple(@RequestParam("numberOfRounds") int numberOfRounds, @RequestBody GameRequest gameRequest) {
-        if(!RequestValidator.validateRequest(gameRequest)) return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-                .body("Invalid request, please provide typeOfGame and stakes larger than 0");
-
+    public ResponseEntity playMultiple(@RequestParam("numberOfRounds") int numberOfRounds, @Valid @RequestBody GameRequest gameRequest) {
         List<GameResponse> gameResponses = new ArrayList<>();
 
-
         BigDecimal totalWin = new BigDecimal("0.00").setScale(2, RoundingMode.DOWN);
+
         double rtp;
+
         for(int i = 0; i < numberOfRounds; i++) {
-            GameResponse gameResponse = CarpsGameLogic.gameLogic(gameRequest);
+            GameResponse gameResponse = CarpsGameLogic.playOneRound(gameRequest);
             totalWin = totalWin.add(gameResponse.getPayout());
 
             gameResponses.add(gameResponse);
