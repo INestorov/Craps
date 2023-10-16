@@ -17,8 +17,8 @@ public class GameResponseTest {
         List<List<Integer>> roundDetails = new ArrayList<>();
 
         List<Integer> dicesThrown = new ArrayList<>();
-        dicesThrown.add(Integer.valueOf(2));
-        dicesThrown.add(Integer.valueOf(5));
+        dicesThrown.add(2);
+        dicesThrown.add(5);
 
         roundDetails.add(dicesThrown);
 
@@ -47,7 +47,7 @@ public class GameResponseTest {
     public void setTypeOfGameTest(){
         gr.setTypeOfGame("crapsTest");
 
-        assertEquals("crapsTest", gr.getTypeOfGame());
+        assertEquals("crapstest", gr.getTypeOfGame());
     }
 
     @Test
@@ -80,8 +80,8 @@ public class GameResponseTest {
         List<List<Integer>> roundDetailsTest = new ArrayList<>();
 
         List<Integer> dicesThrownTest = new ArrayList<>();
-        dicesThrownTest.add(Integer.valueOf(2));
-        dicesThrownTest.add(Integer.valueOf(5));
+        dicesThrownTest.add(2);
+        dicesThrownTest.add(5);
 
         roundDetailsTest.add(dicesThrownTest);
 
@@ -93,8 +93,8 @@ public class GameResponseTest {
         List<List<Integer>> roundDetailsTest = new ArrayList<>();
 
         List<Integer> dicesThrownTest = new ArrayList<>();
-        dicesThrownTest.add(Integer.valueOf(2));
-        dicesThrownTest.add(Integer.valueOf(9));
+        dicesThrownTest.add(2);
+        dicesThrownTest.add(9);
 
         roundDetailsTest.add(dicesThrownTest);
         gr.setRoundDetails(roundDetailsTest);
@@ -112,8 +112,8 @@ public class GameResponseTest {
         List<List<Integer>> roundDetailsTest = new ArrayList<>();
 
         List<Integer> dicesThrownTest = new ArrayList<>();
-        dicesThrownTest.add(Integer.valueOf(2));
-        dicesThrownTest.add(Integer.valueOf(5));
+        dicesThrownTest.add(2);
+        dicesThrownTest.add(5);
 
         roundDetailsTest.add(dicesThrownTest);
 

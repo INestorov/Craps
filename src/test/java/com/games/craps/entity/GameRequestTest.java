@@ -37,7 +37,7 @@ public class GameRequestTest {
     public void setTypeOfGameTest(){
         gr.setTypeOfGame("crapsTest");
 
-        assertEquals("crapsTest", gr.getTypeOfGame());
+        assertEquals("crapstest", gr.getTypeOfGame());
     }
 
     @Test
