@@ -4,7 +4,6 @@ package com.games.craps.entity;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,10 +18,10 @@ public class GameResponse {
     public GameResponse() {}
 
     public GameResponse(BigDecimal stake, String typeOfGame, String outcomeOfRound, BigDecimal payout, List<List<Integer>> roundDetails) {
-        this.stake = stake.setScale(2, RoundingMode.DOWN);
-        this.typeOfGame = typeOfGame.toLowerCase();
+        this.stake = stake;
+        this.typeOfGame = typeOfGame;
         this.outcomeOfRound = outcomeOfRound;
-        this.payout = payout.setScale(2, RoundingMode.DOWN);
+        this.payout = payout;
         this.roundDetails = roundDetails;
     }
 
@@ -31,7 +30,7 @@ public class GameResponse {
     }
 
     public void setStake(BigDecimal stake) {
-        this.stake = stake.setScale(2, RoundingMode.DOWN);
+        this.stake = stake;
     }
 
     public String getTypeOfGame() {
@@ -39,7 +38,7 @@ public class GameResponse {
     }
 
     public void setTypeOfGame(String typeOfGame) {
-        this.typeOfGame = typeOfGame.toLowerCase();
+        this.typeOfGame = typeOfGame;
     }
 
     public String getOutcomeOfRound() {
@@ -55,7 +54,7 @@ public class GameResponse {
     }
 
     public void setPayout(BigDecimal payout) {
-        this.payout = payout.setScale(2, RoundingMode.DOWN);
+        this.payout = payout;
     }
 
     public List<List<Integer>> getRoundDetails() {
