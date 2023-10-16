@@ -32,14 +32,14 @@ public class CarpsGameLogic {
 
         if(sumOfDices == 2 || sumOfDices == 3 || sumOfDices == 12) {
             gameResponse.setOutcomeOfRound("Lose");
-            gameResponse.setPayout(gameResponse.getStake().negate());
+            gameResponse.setPayout(gameRequest.getStake().negate());
             gameResponse.addRoundDetails(diceRolls);
             return gameResponse;
         }
 
         if(sumOfDices == 7 || sumOfDices == 11) {
             gameResponse.setOutcomeOfRound("Win");
-            gameResponse.setPayout(gameResponse.getStake());
+            gameResponse.setPayout(gameRequest.getStake());
             gameResponse.addRoundDetails(diceRolls);
             return gameResponse;
         }
@@ -61,7 +61,7 @@ public class CarpsGameLogic {
                 break;
             } else if(sumPointThrows == sumOfDices) {
                 gameResponse.setOutcomeOfRound("Win");
-                gameResponse.setPayout(gameResponse.getStake());
+                gameResponse.setPayout(gameRequest.getStake());
                 gameResponse.addRoundDetails(diceRollsPoint);
                 break;
             } else {
