@@ -19,8 +19,8 @@ public class CarpsGameLogicTest {
         assertNotNull(gameResponse);
         assertEquals(new BigDecimal("2.00"), gameResponse.getStake());
         assertEquals("craps", gameResponse.getTypeOfGame());
-        assertTrue(gameResponse.getOutcomeOfRound().equals("Win") || gameResponse.getOutcomeOfRound().equals("Lose"));
-        assertTrue(gameResponse.getPayout().equals(gameResponse.getStake()) || gameResponse.getPayout().equals(gameResponse.getStake().negate()));
+        assertTrue((gameResponse.getOutcomeOfRound().equals("Win") && gameResponse.getPayout().equals(gameResponse.getStake()))
+                || (gameResponse.getOutcomeOfRound().equals("Lose") && gameResponse.getPayout().equals(gameResponse.getStake().negate())));
         assertNotNull(gameResponse.getRoundDetails());
     }
 }

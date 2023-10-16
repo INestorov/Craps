@@ -13,7 +13,7 @@ import java.util.List;
 @RestControllerAdvice
 public class InvalidRequestExceptionHandler {
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ExceptionHandler
     public ResponseEntity<ErrorResponse> handleValidationException(MethodArgumentNotValidException ex) {
 
         List<String> errorMessages = new ArrayList<>();

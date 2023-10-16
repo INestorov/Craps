@@ -16,9 +16,7 @@ public class GameResponse {
     private BigDecimal payout;
     private List<List<Integer>> roundDetails;
 
-    public GameResponse() {
-
-    }
+    public GameResponse() {}
 
     public GameResponse(BigDecimal stake, String typeOfGame, String outcomeOfRound, BigDecimal payout, List<List<Integer>> roundDetails) {
         this.stake = stake.setScale(2, RoundingMode.DOWN);
