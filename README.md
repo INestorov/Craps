@@ -54,4 +54,4 @@ Example Request:
 * POST /craps/play-multiple-games: Play multiple rounds of the Craps game.
     * Request Parameters: numberOfGames (integer): Number of games to play.
     * Request Body: GameRequest with stake and game type.
-    * Response: List of GameResponse with the game outcomes for each round.
+  * Response: ResultFromMultipleGames, which consists of MultipleGameStats, which represent the statistics across all games and a list of GameResponses.
