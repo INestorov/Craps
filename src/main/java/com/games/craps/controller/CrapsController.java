@@ -17,8 +17,8 @@ public class CrapsController {
     }
 
     @PostMapping("/play-multiple-games")
-    public ResponseEntity playMultipleGames(@RequestParam("numberOfRounds") int numberOfRounds, @Valid @RequestBody GameRequest gameRequest) {
-        return CarpsGameLogic.playMultipleGames(numberOfRounds, gameRequest);
+    public ResponseEntity playMultipleGames(@RequestParam("numberOfGames") int numberOfGames, @Valid @RequestBody GameRequest gameRequest) {
+        return CarpsGameLogic.playMultipleGames(numberOfGames, gameRequest);
     }
 
 }

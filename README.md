@@ -36,11 +36,11 @@ Example Request:
 
 ### Play Multiple Rounds
 
-To play multiple rounds of the Craps game, make a POST request to the /craps/play-multiple-games endpoint, specifying the number of rounds and providing the necessary input in the request body.
+To play multiple rounds of the Craps game, make a POST request to the /craps/play-multiple-games endpoint, specifying the number of games and providing the necessary input in the request body.
 
 Example Request:
 
-    curl -X POST 'http://localhost:8080/craps/play-multiple-games?numberOfRounds=5'
+    curl -X POST 'http://localhost:8080/craps/play-multiple-games?numberOfGames=5'
     -H "Content-Type: application/json"
     -d '{"stake": 1.0, "typeOfGame": "craps"}'
 
@@ -52,6 +52,6 @@ Example Request:
 
 
 * POST /craps/play-multiple-games: Play multiple rounds of the Craps game.
-    * Request Parameters: numberOfRounds (integer): Number of games to play.
+    * Request Parameters: numberOfGames (integer): Number of games to play.
     * Request Body: GameRequest with stake and game type.
     * Response: List of GameResponse with the game outcomes for each round.

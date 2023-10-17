@@ -14,12 +14,12 @@ public class CarpsGameLogic {
         return ResponseEntity.ok(playOneRound(gameRequest));
     }
 
-    public static ResponseEntity playMultipleGames(int numberOfRounds, GameRequest gameRequest){
+    public static ResponseEntity playMultipleGames(int numberOfGames, GameRequest gameRequest){
         MultipleGamesStats gameStats = new MultipleGamesStats();
-        gameStats.setStakes(gameRequest.getStake().multiply(BigDecimal.valueOf(numberOfRounds)));
+        gameStats.setStakes(gameRequest.getStake().multiply(BigDecimal.valueOf(numberOfGames)));
         List<GameResponse> gameResponses = new ArrayList<>();
 
-        for(int i = 0; i < numberOfRounds; i++) {
+        for(int i = 0; i < numberOfGames; i++) {
             GameResponse gameResponse = playOneRound(gameRequest);
             gameResponses.add(gameResponse);
             gameStats.setTotalWin(gameStats.getTotalWin().add(gameResponse.getPayout()));
