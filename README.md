@@ -3,8 +3,8 @@ This project implements a simple API for playing the game of Craps.
 The API allows users to play a single round or multiple rounds of the game.
 
 ## Features
-* Play a single round of the Craps game.
-* Play multiple rounds of the Craps game with customizable parameters.
+* Play a single game of Craps.
+* Play multiple games of Craps.
 
 ## Getting Started
 
@@ -25,33 +25,33 @@ Ensure you have the following prerequisites installed:
 ## Usage
 
 ### Play a Single Round
-To play a single round of the Craps game, make a POST request to the /craps/play-single-round endpoint,
+To play a single round of the Craps game, make a POST request to the /craps/play-single-game endpoint,
 providing the necessary input in the request body.
 
 Example Request:
 
-    curl -X POST http://localhost:8080/craps/play-single-round
+    curl -X POST http://localhost:8080/craps/play-single-game
     -H "Content-Type: application/json"
     -d '{"stake": 1.0, "typeOfGame": "craps"}'
 
 ### Play Multiple Rounds
 
-To play multiple rounds of the Craps game, make a POST request to the /craps/play-multiple-rounds endpoint, specifying the number of rounds and providing the necessary input in the request body.
+To play multiple rounds of the Craps game, make a POST request to the /craps/play-multiple-games endpoint, specifying the number of rounds and providing the necessary input in the request body.
 
 Example Request:
 
-    curl -X POST 'http://localhost:8080/craps/play-multiple-rounds?numberOfRounds=5'
+    curl -X POST 'http://localhost:8080/craps/play-multiple-games?numberOfRounds=5'
     -H "Content-Type: application/json"
     -d '{"stake": 1.0, "typeOfGame": "craps"}'
 
 ## API Endpoints
 
-* POST /craps/play-single-round: Play a single round of the Craps game.
+* POST /craps/play-single-game: Play a single round of the Craps game.
     * Request Body: GameRequest with stake and game type.
     * Response: GameResponse with the game outcome.
 
 
-* POST /craps/play-multiple-rounds: Play multiple rounds of the Craps game.
-    * Request Parameters: numberOfRounds (integer): Number of rounds to play.
+* POST /craps/play-multiple-games: Play multiple rounds of the Craps game.
+    * Request Parameters: numberOfRounds (integer): Number of games to play.
     * Request Body: GameRequest with stake and game type.
     * Response: List of GameResponse with the game outcomes for each round.

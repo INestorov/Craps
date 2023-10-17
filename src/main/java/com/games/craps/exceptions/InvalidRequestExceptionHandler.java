@@ -1,6 +1,5 @@
-package com.games.craps.validator;
+package com.games.craps.exceptions;
 
-import com.games.craps.entity.ErrorResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

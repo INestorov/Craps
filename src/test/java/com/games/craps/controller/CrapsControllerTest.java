@@ -14,21 +14,21 @@ import java.math.BigDecimal;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @ExtendWith(MockitoExtension.class)
-public class CrapsControllerTest {
+class CrapsControllerTest {
     @InjectMocks
     CrapsController crapsController;
 
     @Test
-    public void singleRoundTest(){
+    void testSingleRoundWhenArgumentsAreValid(){
         GameRequest gameRequest = new GameRequest(new BigDecimal("2.00"), "craps");
-        ResponseEntity responseEntity = crapsController.playSingleRound(gameRequest);
+        ResponseEntity responseEntity = crapsController.playOneGame(gameRequest);
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
     }
 
     @Test
-    public void multipleRoundTest(){
+    void testMultipleRoundsWhenArgumentsAreValid(){
         GameRequest gameRequest = new GameRequest(new BigDecimal("2.00"), "craps");
-        ResponseEntity responseEntity = crapsController.playMultiple(5, gameRequest);
+        ResponseEntity responseEntity = crapsController.playMultipleGames(5, gameRequest);
 
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
     }

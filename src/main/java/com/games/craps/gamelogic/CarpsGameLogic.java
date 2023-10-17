@@ -1,74 +1,101 @@
 package com.games.craps.gamelogic;
 
-import com.games.craps.entity.GameRequest;
-import com.games.craps.entity.GameResponse;
+import com.games.craps.entity.*;
+import org.springframework.http.ResponseEntity;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 public class CarpsGameLogic {
-    public static GameResponse playOneRound(GameRequest gameRequest) {
-        GameResponse gameResponse = new GameResponse();
+    public static ResponseEntity playOneGame(GameRequest gameRequest) {
+        return ResponseEntity.ok(playOneRound(gameRequest));
+    }
 
-        gameResponse.setTypeOfGame(gameRequest.getTypeOfGame());
-        gameResponse.setStake(gameRequest.getStake());
+    public static ResponseEntity playMultipleGames(int numberOfRounds, GameRequest gameRequest){
+        MultipleGamesStats gameStats = new MultipleGamesStats();
+        gameStats.setStakes(gameRequest.getStake().multiply(BigDecimal.valueOf(numberOfRounds)));
+        List<GameResponse> gameResponses = new ArrayList<>();
 
-
-        if(gameResponse.getRoundDetails() == null)  {
-            List<List<Integer>> roundDetails = new ArrayList<>();
-            gameResponse.setRoundDetails(roundDetails);
+        for(int i = 0; i < numberOfRounds; i++) {
+            GameResponse gameResponse = playOneRound(gameRequest);
+            gameResponses.add(gameResponse);
+            gameStats.setTotalWin(gameStats.getTotalWin().add(gameResponse.getPayout()));
         }
 
-        Random random = new Random();
-        int diceRollFirst = random.nextInt(6) + 1;
-        int diceRollSecond = random.nextInt(6) + 1;
+        gameStats.setReturnToPlayer(gameStats.getTotalWin().divide(gameStats.getStakes(), 5, RoundingMode.DOWN));
+        return ResponseEntity.ok(new ResultFromMultipleGames(gameStats, gameResponses));
+    }
 
-        List<Integer> diceRolls = new ArrayList<>();
-        diceRolls.add(diceRollFirst);
-        diceRolls.add(diceRollSecond);
+    public static GameResponse playOneRound(GameRequest gameRequest){
+        GameResponse gameResponse = initGameResponse(gameRequest);
 
-        int sumOfDices = diceRollFirst + diceRollSecond;
+        int counter = 1;
+
+        DiceThrow diceRolls = throwDice(counter);
+        counter++;
+
+        int sumOfDices = diceRolls.getFirstDice() + diceRolls.getSecondDice();
 
         if(sumOfDices == 2 || sumOfDices == 3 || sumOfDices == 12) {
-            gameResponse.setOutcomeOfRound("Lose");
-            gameResponse.setPayout(gameRequest.getStake().negate());
-            gameResponse.addRoundDetails(diceRolls);
-            return gameResponse;
+            return setOutcome(gameResponse, "Lose", gameRequest.getStake(), diceRolls);
         }
 
         if(sumOfDices == 7 || sumOfDices == 11) {
-            gameResponse.setOutcomeOfRound("Win");
-            gameResponse.setPayout(gameRequest.getStake());
-            gameResponse.addRoundDetails(diceRolls);
-            return gameResponse;
+            return setOutcome(gameResponse, "Win", gameRequest.getStake(), diceRolls);
         }
 
         gameResponse.addRoundDetails(diceRolls);
 
         while(true) {
-            int pointThrowFirst = random.nextInt(6) + 1;
-            int pointThrowSecond = random.nextInt(6) + 1;
-            int sumPointThrows = pointThrowFirst + pointThrowSecond;
-            List<Integer> diceRollsPoint = new ArrayList<>();
-            diceRollsPoint.add(pointThrowFirst);
-            diceRollsPoint.add(pointThrowSecond);
+            DiceThrow diceRollsPoint = throwDice(counter);
+            counter++;
+            int sumPointThrows = diceRollsPoint.getFirstDice() + diceRollsPoint.getSecondDice();
 
             if(sumPointThrows == 7){
-                gameResponse.setOutcomeOfRound("Lose");
-                gameResponse.setPayout(gameRequest.getStake().negate());
-                gameResponse.addRoundDetails(diceRollsPoint);
+                setOutcome(gameResponse, "Lose", gameRequest.getStake(), diceRollsPoint);
                 break;
             } else if(sumPointThrows == sumOfDices) {
-                gameResponse.setOutcomeOfRound("Win");
-                gameResponse.setPayout(gameRequest.getStake());
-                gameResponse.addRoundDetails(diceRollsPoint);
+                setOutcome(gameResponse, "Win", gameRequest.getStake(), diceRollsPoint);
                 break;
             } else {
                 gameResponse.addRoundDetails(diceRollsPoint);
             }
         }
+        return gameResponse;
+    }
 
+    public static GameResponse initGameResponse(GameRequest gameRequest) {
+        GameResponse gameResponse = new GameResponse();
+
+        gameResponse.setTypeOfGame(gameRequest.getTypeOfGame());
+        gameResponse.setStake(gameRequest.getStake());
+
+        List<DiceThrow> roundDetails = new ArrayList<>();
+        gameResponse.setRoundDetails(roundDetails);
+        return gameResponse;
+    }
+
+    public static DiceThrow throwDice(int counter){
+        Random random = new Random();
+        int diceRollFirst = random.nextInt(6) + 1;
+        int diceRollSecond = random.nextInt(6) + 1;
+
+        return new DiceThrow(counter, diceRollFirst, diceRollSecond);
+    }
+
+    public static GameResponse setOutcome(GameResponse gameResponse, String outcome, BigDecimal stake, DiceThrow diceThrow){
+        if(outcome.equals("Win")){
+            gameResponse.setPayout(stake);
+            gameResponse.setOutcomeOfRound("Win");
+        } else {
+            gameResponse.setPayout(stake.negate());
+            gameResponse.setOutcomeOfRound("Lose");
+        }
+
+        gameResponse.addRoundDetails(diceThrow);
         return gameResponse;
     }
 }

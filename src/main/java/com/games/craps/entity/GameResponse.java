@@ -1,23 +1,20 @@
 package com.games.craps.entity;
 
-
-import org.springframework.stereotype.Component;
-
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
-@Component
+
 public class GameResponse {
     private BigDecimal stake;
     private String typeOfGame;
     private String outcomeOfRound;
     private BigDecimal payout;
-    private List<List<Integer>> roundDetails;
+    private List<DiceThrow> roundDetails;
 
     public GameResponse() {}
 
-    public GameResponse(BigDecimal stake, String typeOfGame, String outcomeOfRound, BigDecimal payout, List<List<Integer>> roundDetails) {
+    public GameResponse(BigDecimal stake, String typeOfGame, String outcomeOfRound, BigDecimal payout, List<DiceThrow> roundDetails) {
         this.stake = stake;
         this.typeOfGame = typeOfGame;
         this.outcomeOfRound = outcomeOfRound;
@@ -57,15 +54,15 @@ public class GameResponse {
         this.payout = payout;
     }
 
-    public List<List<Integer>> getRoundDetails() {
+    public List<DiceThrow> getRoundDetails() {
         return roundDetails;
     }
 
-    public void setRoundDetails(List<List<Integer>> roundDetails) {
+    public void setRoundDetails(List<DiceThrow> roundDetails) {
         this.roundDetails = roundDetails;
     }
 
-    public void addRoundDetails(List<Integer> diceRolls) {
+    public void addRoundDetails(DiceThrow diceRolls) {
         roundDetails.add(diceRolls);
     }
 
@@ -74,7 +71,7 @@ public class GameResponse {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         GameResponse that = (GameResponse) o;
-        return Objects.equals(stake, that.stake) && Objects.equals(payout, that.payout) && Objects.equals(typeOfGame, that.typeOfGame) && Objects.equals(outcomeOfRound, that.outcomeOfRound) && Objects.equals(roundDetails, that.roundDetails);
+        return Objects.equals(stake, that.stake) && Objects.equals(typeOfGame, that.typeOfGame) && Objects.equals(outcomeOfRound, that.outcomeOfRound) && Objects.equals(payout, that.payout) && Objects.equals(roundDetails, that.roundDetails);
     }
 
     @Override
@@ -84,12 +81,12 @@ public class GameResponse {
 
     @Override
     public String toString() {
-        return "Round{" +
+        return "GameResponse{" +
                 "stake=" + stake +
                 ", typeOfGame='" + typeOfGame + '\'' +
                 ", outcomeOfRound='" + outcomeOfRound + '\'' +
                 ", payout=" + payout +
-                ", roundDetails='" + roundDetails + '\'' +
+                ", roundDetails=" + roundDetails +
                 '}';
     }
 }

@@ -1,4 +1,4 @@
-package com.games.craps.entity;
+package com.games.craps.exceptions;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -8,18 +8,18 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ErrorResponseTest {
+class ErrorResponseTest {
     private ErrorResponse er;
 
     @BeforeEach
-    public void setUp(){
+    void setUp(){
         List<String> error = new ArrayList<>();
         error.add("Test");
         er = new ErrorResponse(error);
     }
 
     @Test
-    public void getMessageTest(){
+    void testGetMessage(){
         List<String> testList = new ArrayList<>();
         testList.add("Test");
 
@@ -27,7 +27,7 @@ public class ErrorResponseTest {
     }
 
     @Test
-    public void setMessageTest(){
+    void testSetMessage(){
         List<String> newList = new ArrayList<>();
         newList.add("TestNew");
         er.setMessage(newList);
@@ -36,7 +36,7 @@ public class ErrorResponseTest {
     }
 
     @Test
-    public void constructorTest(){
+    void testConstructor(){
         List<String> testList = new ArrayList<>();
         testList.add("Test");
 

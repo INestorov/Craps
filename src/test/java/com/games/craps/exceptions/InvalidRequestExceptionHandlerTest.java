@@ -1,6 +1,5 @@
-package com.games.craps.validator;
+package com.games.craps.exceptions;
 
-import com.games.craps.entity.ErrorResponse;
 import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ import static org.mockito.Mockito.when;
 class InvalidRequestExceptionHandlerTest {
 
     @Test
-    void validationExceptionForStakeTest() {
+    void testValidationExceptionForStake() {
         MethodArgumentNotValidException exception = mock(MethodArgumentNotValidException.class);
         BindingResult bindingResult = mock(BindingResult.class);
 
@@ -44,7 +43,7 @@ class InvalidRequestExceptionHandlerTest {
     }
 
     @Test
-    void validationExceptionForTypeOfGameTest() {
+    void testValidationExceptionForTypeOfGame() {
         MethodArgumentNotValidException exception = mock(MethodArgumentNotValidException.class);
         BindingResult bindingResult = mock(BindingResult.class);
 
@@ -70,7 +69,7 @@ class InvalidRequestExceptionHandlerTest {
     }
 
     @Test
-    void validationExceptionForStakeAndTypeOfGameTest() {
+    void testValidationExceptionForStakeAndTypeOfGame() {
         MethodArgumentNotValidException exception = mock(MethodArgumentNotValidException.class);
         BindingResult bindingResult = mock(BindingResult.class);
 

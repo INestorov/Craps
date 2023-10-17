@@ -1,25 +1,18 @@
 package com.games.craps.entity;
 
 import jakarta.validation.constraints.DecimalMin;
-import jakarta.validation.constraints.Digits;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Pattern;
-import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Objects;
 
-@Component
 public class GameRequest {
     @DecimalMin(value="0.0", inclusive = false, message = "Stakes must be larger than 0.")
     private BigDecimal stake;
 
     @Pattern(regexp = "(?i)craps", message = "Type of game must be: 'craps'.")
     private String typeOfGame;
-
-    public GameRequest() {}
 
     public GameRequest(BigDecimal stake, String typeOfGame) {
         this.stake = stake.setScale(2, RoundingMode.DOWN);
