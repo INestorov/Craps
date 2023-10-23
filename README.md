@@ -10,7 +10,7 @@ The API allows users to play a single round or multiple rounds of the game.
 
 ### Prerequisites
 Ensure you have the following prerequisites installed:
-* Java Development Kit (JDK) 8 or later
+* Java Development Kit (JDK) 17 or later
 * Gradle (for building and managing dependencies)
 
 ### Installation
