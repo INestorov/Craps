@@ -13,12 +13,12 @@ public class CrapsController {
 
     @PostMapping("/play-single-game")
     public ResponseEntity playOneGame(@Valid @RequestBody GameRequest gameRequest){
-        return CarpsGameLogic.playOneGame(gameRequest);
+        return new CarpsGameLogic().playOneGame(gameRequest);
     }
 
     @PostMapping("/play-multiple-games")
     public ResponseEntity playMultipleGames(@RequestParam("numberOfGames") int numberOfGames, @Valid @RequestBody GameRequest gameRequest) {
-        return CarpsGameLogic.playMultipleGames(numberOfGames, gameRequest);
+        return new CarpsGameLogic().playMultipleGames(numberOfGames, gameRequest);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.games.craps.gamelogic;
 
 import com.games.craps.entity.*;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 
 import java.math.BigDecimal;
@@ -10,11 +11,12 @@ import java.util.List;
 import java.util.Random;
 
 public class CarpsGameLogic {
-    public static ResponseEntity playOneGame(GameRequest gameRequest) {
+    @Bean
+    public ResponseEntity playOneGame(GameRequest gameRequest) {
         return ResponseEntity.ok(playOneRound(gameRequest));
     }
-
-    public static ResponseEntity playMultipleGames(int numberOfGames, GameRequest gameRequest){
+    @Bean
+    public ResponseEntity playMultipleGames(int numberOfGames, GameRequest gameRequest){
         MultipleGamesStats gameStats = new MultipleGamesStats();
         gameStats.setStakes(gameRequest.getStake().multiply(BigDecimal.valueOf(numberOfGames)));
         List<GameResponse> gameResponses = new ArrayList<>();
@@ -29,7 +31,7 @@ public class CarpsGameLogic {
         return ResponseEntity.ok(new ResultFromMultipleGames(gameStats, gameResponses));
     }
 
-    public static GameResponse playOneRound(GameRequest gameRequest){
+    public GameResponse playOneRound(GameRequest gameRequest){
         GameResponse gameResponse = initGameResponse(gameRequest);
 
         int counter = 1;
@@ -67,7 +69,7 @@ public class CarpsGameLogic {
         return gameResponse;
     }
 
-    public static GameResponse initGameResponse(GameRequest gameRequest) {
+    public GameResponse initGameResponse(GameRequest gameRequest) {
         GameResponse gameResponse = new GameResponse();
 
         gameResponse.setTypeOfGame(gameRequest.getTypeOfGame());
@@ -78,7 +80,7 @@ public class CarpsGameLogic {
         return gameResponse;
     }
 
-    public static DiceThrow throwDice(int counter){
+    public DiceThrow throwDice(int counter){
         Random random = new Random();
         int diceRollFirst = random.nextInt(6) + 1;
         int diceRollSecond = random.nextInt(6) + 1;
@@ -86,7 +88,7 @@ public class CarpsGameLogic {
         return new DiceThrow(counter, diceRollFirst, diceRollSecond);
     }
 
-    public static GameResponse setOutcome(GameResponse gameResponse, String outcome, BigDecimal stake, DiceThrow diceThrow){
+    public GameResponse setOutcome(GameResponse gameResponse, String outcome, BigDecimal stake, DiceThrow diceThrow){
         if(outcome.equals("Win")){
             gameResponse.setPayout(stake);
             gameResponse.setOutcomeOfRound("Win");

@@ -17,7 +17,7 @@ class CarpsGameLogicTest {
     void testPlayOneGame() {
         GameRequest gameRequest = new GameRequest(new BigDecimal("2.00"), "craps");
 
-        ResponseEntity responseEntity = CarpsGameLogic.playOneGame(gameRequest);
+        ResponseEntity responseEntity = new CarpsGameLogic().playOneGame(gameRequest);
 
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
     }
@@ -26,7 +26,7 @@ class CarpsGameLogicTest {
     void testPlayMultipleGames() {
         GameRequest gameRequest = new GameRequest(new BigDecimal("2.00"), "craps");
 
-        ResponseEntity responseEntity = CarpsGameLogic.playMultipleGames(5, gameRequest);
+        ResponseEntity responseEntity = new CarpsGameLogic().playMultipleGames(5, gameRequest);
 
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.OK));
     }
@@ -35,7 +35,7 @@ class CarpsGameLogicTest {
     void playOneRoundTest() {
         GameRequest gameRequest = new GameRequest(new BigDecimal("2.00"), "craps");
 
-        GameResponse gameResponse = CarpsGameLogic.playOneRound(gameRequest);
+        GameResponse gameResponse = new CarpsGameLogic().playOneRound(gameRequest);
 
         assertNotNull(gameResponse);
         assertEquals(new BigDecimal("2.00"), gameResponse.getStake());
