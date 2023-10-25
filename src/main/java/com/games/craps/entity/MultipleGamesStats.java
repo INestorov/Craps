@@ -60,10 +60,11 @@ public class MultipleGamesStats {
 
     @Override
     public String toString() {
-        return "GameStats{" +
-                "stakes=" + stakes +
-                ", totalWin=" + totalWin +
-                ", returnToPlayer=" + returnToPlayer +
-                '}';
+        final StringBuilder sb = new StringBuilder("MultipleGamesStats{");
+        sb.append("stakes=").append(stakes);
+        sb.append(", totalWin=").append(totalWin);
+        sb.append(", returnToPlayer=").append(returnToPlayer);
+        sb.append('}');
+        return sb.toString();
     }
 }

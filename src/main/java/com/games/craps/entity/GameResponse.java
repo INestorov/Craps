@@ -81,12 +81,13 @@ public class GameResponse {
 
     @Override
     public String toString() {
-        return "GameResponse{" +
-                "stake=" + stake +
-                ", typeOfGame='" + typeOfGame + '\'' +
-                ", outcomeOfRound='" + outcomeOfRound + '\'' +
-                ", payout=" + payout +
-                ", roundDetails=" + roundDetails +
-                '}';
+        final StringBuilder sb = new StringBuilder("GameResponse{");
+        sb.append("stake=").append(stake);
+        sb.append(", typeOfGame='").append(typeOfGame).append('\'');
+        sb.append(", outcomeOfRound='").append(outcomeOfRound).append('\'');
+        sb.append(", payout=").append(payout);
+        sb.append(", roundDetails=").append(roundDetails);
+        sb.append('}');
+        return sb.toString();
     }
 }

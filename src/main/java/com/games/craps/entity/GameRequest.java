@@ -50,9 +50,10 @@ public class GameRequest {
 
     @Override
     public String toString() {
-        return "GameRequest{" +
-                "stake=" + stake +
-                ", typeOfGame='" + typeOfGame + '\'' +
-                '}';
+        final StringBuilder sb = new StringBuilder("GameRequest{");
+        sb.append("stake=").append(stake);
+        sb.append(", typeOfGame='").append(typeOfGame).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

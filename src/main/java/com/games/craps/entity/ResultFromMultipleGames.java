@@ -43,9 +43,10 @@ public class ResultFromMultipleGames {
 
     @Override
     public String toString() {
-        return "GameResult{" +
-                "gameStats=" + gameStats +
-                ", gameResponses=" + gameResponses +
-                '}';
+        final StringBuilder sb = new StringBuilder("ResultFromMultipleGames{");
+        sb.append("gameStats=").append(gameStats);
+        sb.append(", gameResponses=").append(gameResponses);
+        sb.append('}');
+        return sb.toString();
     }
 }

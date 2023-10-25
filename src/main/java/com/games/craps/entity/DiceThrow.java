@@ -52,10 +52,11 @@ public class DiceThrow {
 
     @Override
     public String toString() {
-        return "DiceThrow{" +
-                "throwNumber=" + throwNumber +
-                ", firstDice=" + firstDice +
-                ", secondDice=" + secondDice +
-                '}';
+        final StringBuilder sb = new StringBuilder("DiceThrow{");
+        sb.append("throwNumber=").append(throwNumber);
+        sb.append(", firstDice=").append(firstDice);
+        sb.append(", secondDice=").append(secondDice);
+        sb.append('}');
+        return sb.toString();
     }
 }
