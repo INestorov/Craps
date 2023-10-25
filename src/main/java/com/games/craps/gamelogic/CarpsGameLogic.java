@@ -88,10 +88,10 @@ public class CarpsGameLogic {
 
     public GameResponse setOutcome(GameResponse gameResponse, String outcome, BigDecimal stake, DiceThrow diceThrow){
         if(outcome.equals("Win")){
-            gameResponse.setPayout(stake);
+            gameResponse.setPayout(stake.multiply(new BigDecimal(2)));
             gameResponse.setOutcomeOfRound("Win");
         } else {
-            gameResponse.setPayout(stake.negate());
+            gameResponse.setPayout(new BigDecimal(0));
             gameResponse.setOutcomeOfRound("Lose");
         }
 
