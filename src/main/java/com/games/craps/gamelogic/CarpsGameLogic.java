@@ -1,21 +1,19 @@
 package com.games.craps.gamelogic;
 
 import com.games.craps.entity.*;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
+@Service
 public class CarpsGameLogic {
-    @Bean
     public ResponseEntity playOneGame(GameRequest gameRequest) {
         return ResponseEntity.ok(playOneRound(gameRequest));
     }
-    @Bean
     public ResponseEntity playMultipleGames(int numberOfGames, GameRequest gameRequest){
         MultipleGamesStats gameStats = new MultipleGamesStats();
         gameStats.setStakes(gameRequest.getStake().multiply(BigDecimal.valueOf(numberOfGames)));
